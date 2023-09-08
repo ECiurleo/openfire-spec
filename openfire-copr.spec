@@ -9,6 +9,7 @@ Source0: https://github.com/igniterealtime/Openfire/archive/refs/tags/v%{version
 # jres as well due to an ancient problem with java-1.5.0-ibm jpackage RPM
 Requires: java >= 1:11.0.0
 %endif
+BuildRequires:  make, git, go, wget, bsdtar, binutils, libX11-devel, jq, maven
 Group: Applications/Communications
 Vendor: Igniterealtime Community
 License: Apache License 2.0
@@ -26,9 +27,12 @@ XMPP (Jabber) protocol. It has great performance, is easy to setup and use,
 and delivers an innovative feature set.
 
 %prep
+%setup -q -n Openfire
 
 %build
-./mvnw package
+java -version
+mvn -version
+./mvnw clean package
 
 %install
 # Prep the install location.
