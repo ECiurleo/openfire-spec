@@ -28,9 +28,7 @@ and delivers an innovative feature set.
 %prep
 
 %build
-ant openfire
-ant -Dplugin=search plugin
-cd ..
+./mvnw package
 
 %install
 # Prep the install location.
