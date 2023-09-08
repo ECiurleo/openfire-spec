@@ -2,7 +2,7 @@ Summary: Openfire XMPP Server
 Name: openfire
 Version: 4.7.5
 Release: 1%{?dist}
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRoot: %{_builddir}/%{name}-root
 Source0: https://github.com/igniterealtime/Openfire/archive/refs/tags/v%{version}.tar.gz
 %ifarch noarch
 # Note that epoch is set here to 1, this appears to be consistent with non-Redhat
@@ -19,30 +19,31 @@ URL: https://igniterealtime.org/projects/openfire/
 # couldn't find another way to disable the brp-java-repack-jars which was called in __os_install_post
 %define __os_install_post %{nil}
 %define debug_package %{nil}
-# libshaj.so is included in the noarch build, so we disable the error about this
-%define _binaries_in_noarch_packages_terminate_build 0
 
 %description
 Openfire is a leading Open Source, cross-platform IM server based on the
-XMPP (Jabber) protocol. It has great performance, is easy to set up and use,
+XMPP (Jabber) protocol. It has great performance, is easy to setup and use,
 and delivers an innovative feature set.
 
 %prep
-%setup -q
+%setup -q -n openfire_src
 
 %build
-# Nothing to build
+cd build
+ant openfire
+ant -Dplugin=search plugin
+cd ..
 
 %install
 # Prep the install location.
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{prefix}
 # Copy over the main install tree.
-cp -R . $RPM_BUILD_ROOT%{homedir}
+cp -R target/openfire $RPM_BUILD_ROOT%{homedir}
 %ifnarch noarch
 # Set up distributed JRE
 pushd $RPM_BUILD_ROOT%{homedir}
-gzip -cd %{SOURCE0} | tar xvf -
+gzip -cd %{SOURCE1} | tar xvf -
 popd
 %endif
 # Set up the init script.
@@ -54,9 +55,13 @@ chmod 755 $RPM_BUILD_ROOT%{homedir}/bin/openfire.sh
 # Set up the sysconfig file.
 mkdir -p $RPM_BUILD_ROOT/etc/sysconfig
 cp $RPM_BUILD_ROOT%{homedir}/bin/extra/redhat/openfire-sysconfig $RPM_BUILD_ROOT/etc/sysconfig/openfire
+# Copy over the documentation
+cp -R documentation $RPM_BUILD_ROOT%{homedir}/documentation
 cp changelog.html $RPM_BUILD_ROOT%{homedir}/
 cp LICENSE.html $RPM_BUILD_ROOT%{homedir}/
 cp README.html $RPM_BUILD_ROOT%{homedir}/
+# Copy over the i18n files
+cp -R resources/i18n $RPM_BUILD_ROOT%{homedir}/resources/i18n
 # Make sure scripts are executable
 chmod 755 $RPM_BUILD_ROOT%{homedir}/bin/extra/openfired
 chmod 755 $RPM_BUILD_ROOT%{homedir}/bin/extra/redhat-postinstall.sh
@@ -69,7 +74,6 @@ rm -f $RPM_BUILD_ROOT%{homedir}/bin/*.bat
 rm -rf $RPM_BUILD_ROOT%{homedir}/resources/nativeAuth/osx-ppc
 rm -rf $RPM_BUILD_ROOT%{homedir}/resources/nativeAuth/win32-x86
 rm -f $RPM_BUILD_ROOT%{homedir}/lib/*.dll
-rm -f $RPM_BUILD_ROOT%{homedir}/conf/openfire-demoboot.xml
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -122,12 +126,12 @@ exit 0
 %dir %{homedir}/resources/database/upgrade
 %dir %{homedir}/resources/database/upgrade/*
 %{homedir}/resources/database/upgrade/*/*
+%dir %{homedir}/resources/i18n
+%{homedir}/resources/i18n/*
 %dir %{homedir}/resources/nativeAuth
 %dir %{homedir}/resources/nativeAuth/linux-i386
 %{homedir}/resources/nativeAuth/linux-i386/*
 %dir %{homedir}/resources/security
-%dir %{homedir}/resources/security/archive
-%{homedir}/resources/security/archive/readme.txt
 %dir %{homedir}/resources/spank
 %{homedir}/resources/spank/index.html
 %dir %{homedir}/resources/spank/WEB-INF
