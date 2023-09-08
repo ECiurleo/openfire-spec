@@ -26,8 +26,6 @@ XMPP (Jabber) protocol. It has great performance, is easy to setup and use,
 and delivers an innovative feature set.
 
 %prep
-# Use %autosetup
-%autosetup -q build
 
 %build
 cd build
