@@ -1,9 +1,9 @@
 Summary: Openfire XMPP Server
 Name: openfire
-Version: %{OPENFIRE_VERSION}
-Release: %{OPENFIRE_RELEASE}
+Version: 4.7.5
+Release: %{?dist}
 BuildRoot: %{_builddir}/%{name}-root
-Source0: %{OPENFIRE_SOURCE}
+Source0: https://github.com/igniterealtime/Openfire/archive/refs/tags/v%{version}.tar.gz
 %ifarch noarch
 # Note that epoch is set here to 1, this appears to be consistent with non-Redhat
 # jres as well due to an ancient problem with java-1.5.0-ibm jpackage RPM
@@ -148,5 +148,4 @@ exit 0
 %endif
 
 %changelog
-* %{OPENFIRE_BUILDDATE} Igniterealtime Community <webmaster@igniterealtime.org> %{OPENFIRE_VERSION}-%{OPENFIRE_RELEASE}
-- Automated RPM build with git rev-parse --short HEAD of %{OPENFIRE_REPOVERSION}
+* Tue May 23 2023 Igniterealtime Community <webmaster@igniterealtime.org> 
