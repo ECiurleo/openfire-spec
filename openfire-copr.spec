@@ -30,13 +30,7 @@ XMPP (Jabber) protocol. It has great performance, is easy to setup and use,
 and delivers an innovative feature set.
 
 %prep
-#!/bin/sh
-echo "Current working directory: $(pwd)"
-ls -al
-mkdir -p openfire
-%setup -q -n openfire
-echo "Contents of working directory after %setup:"
-ls -al
+#!/usr/bin/env bash
 
 %build
 #!/usr/bin/env bash
