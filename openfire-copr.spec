@@ -2,7 +2,7 @@ Summary: Openfire XMPP Server
 Name: openfire
 Version: 4.7.5
 Release: 1%{?dist}
-BuildRoot: %{_builddir}/%{name}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Source0: https://github.com/igniterealtime/Openfire/archive/refs/tags/v%{version}.tar.gz
 %ifarch noarch
 # Note that epoch is set here to 1, this appears to be consistent with non-Redhat
@@ -11,9 +11,7 @@ Requires: java >= 1:11.0.0
 %endif
 Group: Applications/Communications
 Vendor: Igniterealtime Community
-Packager: Igniterealtime Community
-License: Apache license v2.0
-AutoReqProv: no
+License: Apache License 2.0
 URL: https://igniterealtime.org/projects/openfire/
 
 %define prefix /opt
@@ -26,15 +24,14 @@ URL: https://igniterealtime.org/projects/openfire/
 
 %description
 Openfire is a leading Open Source, cross-platform IM server based on the
-XMPP (Jabber) protocol. It has great performance, is easy to setup and use,
+XMPP (Jabber) protocol. It has great performance, is easy to set up and use,
 and delivers an innovative feature set.
 
 %prep
-#!/usr/bin/env bash
+%setup -q
 
 %build
-#!/usr/bin/env bash
-
+# Nothing to build
 
 %install
 # Prep the install location.
@@ -51,7 +48,6 @@ popd
 # Set up the init script.
 mkdir -p $RPM_BUILD_ROOT/etc/init.d
 cp $RPM_BUILD_ROOT%{homedir}/bin/extra/redhat/openfire $RPM_BUILD_ROOT/etc/init.d/openfire
-mkdir -p $RPM_BUILD_ROOT/etc/init.d/openfire
 chmod 755 $RPM_BUILD_ROOT/etc/init.d/openfire
 # Make the startup script executable.
 chmod 755 $RPM_BUILD_ROOT%{homedir}/bin/openfire.sh
