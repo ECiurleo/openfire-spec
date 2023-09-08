@@ -24,8 +24,9 @@ Openfire is a real-time collaboration (RTC) server licensed under the Open Sourc
 %install
 # Prep the install location.
 mkdir -p %{_builddir}%{prefix}
+tree
 # Copy over the main install tree.
-cp -R target/openfire %{_builddir}%{homedir}
+cp -R target/Openfire %{_builddir}%{homedir}
 %ifnarch noarch
 # Set up distributed JRE
 pushd %{_builddir}%{homedir}
