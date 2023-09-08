@@ -28,7 +28,6 @@ and delivers an innovative feature set.
 %prep
 
 %build
-cd build
 ant openfire
 ant -Dplugin=search plugin
 cd ..
