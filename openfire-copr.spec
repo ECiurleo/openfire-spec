@@ -30,8 +30,9 @@ pwd
 ls -l
 mkdir -p openfire_src
 ls -l
-%autosetup -q -n openfire_src
+%autosetup -n openfire_src
 mkdir -p build
+pwd
 ls -l
 
 %build
