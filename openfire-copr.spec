@@ -26,14 +26,12 @@ XMPP (Jabber) protocol. It has great performance, is easy to setup and use,
 and delivers an innovative feature set.
 
 %prep
-pwd
-ls -l
-mkdir -p openfire_src
-ls -l
-%autosetup -n openfire_src
-mkdir -p build
-pwd
-ls -l
+# Ensure the 'openfire_src' directory is created
+mkdir -p %{name}-%{version}
+cd %{name}-%{version}
+
+# Use %autosetup without specifying the directory name
+%autosetup -q
 
 %build
 cd build
