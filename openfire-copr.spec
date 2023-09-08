@@ -33,6 +33,7 @@ and delivers an innovative feature set.
 #!/bin/sh
 echo "Current working directory: $(pwd)"
 ls -al
+mkdir -p openfire
 %setup -q -n openfire
 echo "Contents of working directory after %setup:"
 ls -al
