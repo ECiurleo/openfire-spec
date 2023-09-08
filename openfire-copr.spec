@@ -36,47 +36,47 @@ cd ..
 
 %install
 # Prep the install location.
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{prefix}
+rm -rf %{_builddir}
+mkdir -p %{_builddir}%{prefix}
 # Copy over the main install tree.
-cp -R target/openfire $RPM_BUILD_ROOT%{homedir}
+cp -R target/openfire %{_builddir}%{homedir}
 %ifnarch noarch
 # Set up distributed JRE
-pushd $RPM_BUILD_ROOT%{homedir}
-gzip -cd %{SOURCE1} | tar xvf -
+pushd %{_builddir}%{homedir}
+gzip -cd %{SOURCE0} | tar xvf -
 popd
 %endif
 # Set up the init script.
-mkdir -p $RPM_BUILD_ROOT/etc/init.d
-cp $RPM_BUILD_ROOT%{homedir}/bin/extra/redhat/openfire $RPM_BUILD_ROOT/etc/init.d/openfire
-chmod 755 $RPM_BUILD_ROOT/etc/init.d/openfire
+mkdir -p %{_builddir}/etc/init.d
+cp %{_builddir}%{homedir}/bin/extra/redhat/openfire %{_builddir}/etc/init.d/openfire
+chmod 755 %{_builddir}/etc/init.d/openfire
 # Make the startup script executable.
-chmod 755 $RPM_BUILD_ROOT%{homedir}/bin/openfire.sh
+chmod 755 %{_builddir}%{homedir}/bin/openfire.sh
 # Set up the sysconfig file.
-mkdir -p $RPM_BUILD_ROOT/etc/sysconfig
-cp $RPM_BUILD_ROOT%{homedir}/bin/extra/redhat/openfire-sysconfig $RPM_BUILD_ROOT/etc/sysconfig/openfire
+mkdir -p %{_builddir}/etc/sysconfig
+cp %{_builddir}%{homedir}/bin/extra/redhat/openfire-sysconfig %{_builddir}/etc/sysconfig/openfire
 # Copy over the documentation
-cp -R documentation $RPM_BUILD_ROOT%{homedir}/documentation
-cp changelog.html $RPM_BUILD_ROOT%{homedir}/
-cp LICENSE.html $RPM_BUILD_ROOT%{homedir}/
-cp README.html $RPM_BUILD_ROOT%{homedir}/
+cp -R documentation %{_builddir}%{homedir}/documentation
+cp changelog.html %{_builddir}%{homedir}/
+cp LICENSE.html %{_builddir}%{homedir}/
+cp README.html %{_builddir}%{homedir}/
 # Copy over the i18n files
-cp -R resources/i18n $RPM_BUILD_ROOT%{homedir}/resources/i18n
+cp -R resources/i18n %{_builddir}%{homedir}/resources/i18n
 # Make sure scripts are executable
-chmod 755 $RPM_BUILD_ROOT%{homedir}/bin/extra/openfired
-chmod 755 $RPM_BUILD_ROOT%{homedir}/bin/extra/redhat-postinstall.sh
+chmod 755 %{_builddir}%{homedir}/bin/extra/openfired
+chmod 755 %{_builddir}%{homedir}/bin/extra/redhat-postinstall.sh
 # Move over the embedded db viewer pieces
-mv $RPM_BUILD_ROOT%{homedir}/bin/extra/embedded-db.rc $RPM_BUILD_ROOT%{homedir}/bin
-mv $RPM_BUILD_ROOT%{homedir}/bin/extra/embedded-db-viewer.sh $RPM_BUILD_ROOT%{homedir}/bin
+mv %{_builddir}%{homedir}/bin/extra/embedded-db.rc %{_builddir}%{homedir}/bin
+mv %{_builddir}%{homedir}/bin/extra/embedded-db-viewer.sh %{_builddir}%{homedir}/bin
 # We don't really need any of these things.
-rm -rf $RPM_BUILD_ROOT%{homedir}/bin/extra
-rm -f $RPM_BUILD_ROOT%{homedir}/bin/*.bat
-rm -rf $RPM_BUILD_ROOT%{homedir}/resources/nativeAuth/osx-ppc
-rm -rf $RPM_BUILD_ROOT%{homedir}/resources/nativeAuth/win32-x86
-rm -f $RPM_BUILD_ROOT%{homedir}/lib/*.dll
+rm -rf %{_builddir}%{homedir}/bin/extra
+rm -f %{_builddir}%{homedir}/bin/*.bat
+rm -rf %{_builddir}%{homedir}/resources/nativeAuth/osx-ppc
+rm -rf %{_builddir}%{homedir}/resources/nativeAuth/win32-x86
+rm -f %{_builddir}%{homedir}/lib/*.dll
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{_builddir}
 
 %preun
 if [ "$1" == "0" ]; then
