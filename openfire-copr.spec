@@ -34,7 +34,9 @@ and delivers an innovative feature set.
 
 %build
 #!/usr/bin/env bash
-export RPMARCH=noarch
+# Run the Maven package command
+./mvnw package
+
 export RPMBUILD_HOME=$PWD/rpmbuild
 
 # Remove previous rpmbuild folder
