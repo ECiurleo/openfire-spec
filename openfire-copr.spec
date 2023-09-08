@@ -1,7 +1,7 @@
 Summary: Openfire XMPP Server
 Name: openfire
 Version: 4.7.5
-Release: %{?dist}
+Release: 1%{?dist}
 BuildRoot: %{_builddir}/%{name}-root
 Source0: https://github.com/igniterealtime/Openfire/archive/refs/tags/v%{version}.tar.gz
 %ifarch noarch
