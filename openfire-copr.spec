@@ -16,7 +16,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Openfire is a real-time collaboration (RTC) server licensed under the Open Source Apache License. It uses the only widely adopted open protocol for instant messaging, XMPP (also called Jabber).
 
 %prep
-%autosetup -q -n %{name}
+%autosetup -n %{name}
 
 %build
 # Nothing to build, as it's Java-based.
