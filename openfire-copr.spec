@@ -51,6 +51,7 @@ popd
 # Set up the init script.
 mkdir -p $RPM_BUILD_ROOT/etc/init.d
 cp $RPM_BUILD_ROOT%{homedir}/bin/extra/redhat/openfire $RPM_BUILD_ROOT/etc/init.d/openfire
+mkdir -p $RPM_BUILD_ROOT/etc/init.d/openfire
 chmod 755 $RPM_BUILD_ROOT/etc/init.d/openfire
 # Make the startup script executable.
 chmod 755 $RPM_BUILD_ROOT%{homedir}/bin/openfire.sh
