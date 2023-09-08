@@ -1,13 +1,13 @@
 %define name openfire
-%define version 4.7.1
-%define copr
+%define version 4.7.5
+%define release copr
 
 Summary: XMPP server
 Name: %{name}
 Version: %{version}
 Release: %{release}
 License: Apache License, Version 2.0
-Source0: https://github.com/igniterealtime/Openfire/archive/%{version}.tar.gz
+Source0: https://github.com/igniterealtime/Openfire/archive/refs/tags/v%{version}.tar.gz
 
 BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
