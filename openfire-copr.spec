@@ -149,3 +149,4 @@ exit 0
 
 %changelog
 * Tue May 23 2023 Igniterealtime Community <webmaster@igniterealtime.org> 
+- Build of version %{version} - changes here https://github.com/igniterealtime/Openfire/releases/tag/v%{version}
