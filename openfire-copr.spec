@@ -1,38 +1,25 @@
-Summary: Openfire XMPP Server
-Name: openfire
-Version: 4.7.5
-Release: 1%{?dist}
-BuildRoot: %{_builddir}/%{name}-root
-Source0: https://github.com/igniterealtime/Openfire/archive/refs/tags/v%{version}.tar.gz
-%ifarch noarch
-# Note that epoch is set here to 1, this appears to be consistent with non-Redhat
-# jres as well due to an ancient problem with java-1.5.0-ibm jpackage RPM
-Requires: java >= 1:11.0.0
-%endif
-BuildRequires:  make, git, go, wget, bsdtar, binutils, libX11-devel, jq, maven
-Group: Applications/Communications
-Vendor: Igniterealtime Community
-License: Apache License 2.0
-URL: https://igniterealtime.org/projects/openfire/
+%define name openfire
+%define version 4.7.1
+%define copr
 
-%define prefix /opt
-%define homedir %{prefix}/openfire
-# couldn't find another way to disable the brp-java-repack-jars which was called in __os_install_post
-%define __os_install_post %{nil}
-%define debug_package %{nil}
+Summary: XMPP server
+Name: %{name}
+Version: %{version}
+Release: %{release}
+License: Apache License, Version 2.0
+Source0: https://github.com/igniterealtime/Openfire/archive/%{version}.tar.gz
+
+BuildArch: noarch
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 %description
-Openfire is a leading Open Source, cross-platform IM server based on the
-XMPP (Jabber) protocol. It has great performance, is easy to setup and use,
-and delivers an innovative feature set.
+Openfire is a real-time collaboration (RTC) server licensed under the Open Source Apache License. It uses the only widely adopted open protocol for instant messaging, XMPP (also called Jabber).
 
 %prep
-%setup -q -n Openfire
+%setup -q -n %{name}-%{version}
 
 %build
-java -version
-mvn -version
-./mvnw clean package
+# Nothing to build, as it's Java-based.
 
 %install
 # Prep the install location.
