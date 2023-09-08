@@ -26,7 +26,6 @@ XMPP (Jabber) protocol. It has great performance, is easy to setup and use,
 and delivers an innovative feature set.
 
 %prep
-%setup -q -n openfire_src
 
 %build
 cd build
