@@ -45,7 +45,7 @@ cp -R . $RPM_BUILD_ROOT%{homedir}
 %ifnarch noarch
 # Set up distributed JRE
 pushd $RPM_BUILD_ROOT%{homedir}
-gzip -cd %{SOURCE1} | tar xvf -
+gzip -cd %{SOURCE0} | tar xvf -
 popd
 %endif
 # Set up the init script.
